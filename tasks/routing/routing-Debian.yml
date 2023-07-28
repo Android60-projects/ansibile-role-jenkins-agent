@@ -1,0 +1,13 @@
+---
+- name: Open ports for SSH (Jenkins Agent)
+  ufw:
+    rule: allow
+    direction: in
+    proto: "{{ item.proto }}"
+    port: "{{ item.port }}"
+    comment: Created by Ansible
+    state: enabled
+    delete: false
+  with_items:
+    - {port: '22', proto: 'tcp'}
+  notify: reload ufw
