@@ -1,0 +1,27 @@
+---
+jenkins_user: "jenkins"
+jenkins_user_auth_pubkeys: |
+  ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDj+7+dvpUhWb6yO3qxhQjPPzVTZxwZRSiIaqj/Jozyh1cmjxs5HwEUhKLxhEFRhVcYCTT+mhIjJ1mEF6CYfuQNwzOIiPNv0tmwB6+ogN+30MOLC4OF2Jc4wgKr/p2siwsjmLk30lQ82qZzhfVXh1PHXWCd0+S/ucClxSj5Yx1EPueUx+mpNiAGFS0DUVJXzu/AHPp7khL50H9N/3ZiLZZcrrhWmofXxAzUsA51r28YcyxrVa3k6AYZidBXe9rIpPdZWL/G6cfVRSB3nOFOPp4ln9a2ikKXiTHZL3JdkyC8psRFYuEk/8v4XnnQ2oQZCO4gZZvTroq8VxVQ/NbdHfzKFK+7GsvDw4dzqKrDokEAYwWp7ltzFefPPlONYI4xsPhR8uB+yWDPe8Gu39uVIP3ACIdFKvUcC7Cy0p4/u436F3RVXyhhHGuNBYA6rAndWiaG26S6RJeiAatxx6PMPjVRqoxd4NQDKjvdUXGYhZlafno7liqUwJpueUww0ddJdKs= user@example
+
+add_jenkins_node: false
+master_username: "jenkins-master-user"
+master_password: "jenkins-master-password"
+master_url: "https://jenkins.example.com"
+
+# general node
+node_agent_name: testing-ansible
+node_executors_num: 4
+node_environments: {}
+node_mode_exclusive: false
+
+# jenkins linux node
+node_linux_host: "{{ ansible_host }}"
+node_linux_ssh_port: 22
+node_linux_home: /home/jenkins
+node_linux_jenkins_cred_id: molecule-test-ssh
+node_linux_jenkins_username: user
+node_linux_jenkins_password: password
+node_linux_jenkins_public_key: ""
+node_linux_user_group: user
+node_linux_labels:
+  - molecule-virtualbox.server

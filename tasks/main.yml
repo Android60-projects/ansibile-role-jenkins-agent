@@ -1,0 +1,50 @@
+---
+- include_vars: "vars/{{ ansible_os_family }}.yml"
+
+- name: Install required packages
+  tags:
+    - setup
+  package:
+    name:
+      - "{{ java_package_name }}"
+    state: present
+  become: true
+
+- name: Install qemu-user-static
+  when: ansible_os_family == 'Debian'
+  tags:
+    - setup
+  package:
+    name:
+      - qemu-user-static
+    state: present
+  become: true
+
+- name: Add a jenkins user.
+  tags:
+    - setup
+  user:
+    name: "{{ jenkins_user }}"
+    state: present
+    shell: /bin/bash
+
+- name: Set authorized keys
+  tags:
+    - setup
+  ansible.posix.authorized_key:
+    user: "{{ jenkins_user }}"
+    state: present
+    key: "{{ jenkins_user_auth_pubkeys }}"
+
+- name: Add Jenkins Agent to Master
+  tags:
+    - add-agent
+  when: add_jenkins_node == true
+  jenkins_script:
+    user: "{{ master_username }}"
+    password: "{{ master_password }}"
+    validate_certs: false
+    timeout: 120
+    url: "{{ master_url }}"
+    script: >-
+      {{ lookup('template', 'add_linux_node.groovy.j2') }}

@@ -1,0 +1,27 @@
+---
+dependency:
+  name: galaxy
+lint: |
+  set -e
+  yamllint .
+#  ansible-lint
+driver:
+  name: vagrant
+  provider:
+    name: virtualbox
+    type: virtualbox
+  parallel: true
+  provision: yes
+platforms:
+  - name: test-jenkins-molecule-vm
+    box: ${MOLECULE_DISTRO:-geerlingguy/ubuntu2004}
+    memory: 1024
+    cpus: 1
+provisioner:
+  name: ansible
+  connection_options:
+    ansible_ssh_user: vagrant
+    ansible_become: true
+  log: true
+verifier:
+  name: ansible
