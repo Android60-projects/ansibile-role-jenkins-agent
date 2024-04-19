@@ -2,6 +2,8 @@
 
 This directory contains role used for setting up jenkins agent.
 
+[![Molecule test](https://github.com/Android60-projects/ansibile-role-jenkins-agent/actions/workflows/molecule.yml/badge.svg?branch=main)](https://github.com/Android60-projects/ansibile-role-jenkins-agent/actions/workflows/molecule.yml)
+
 [Ansible role by lean-delivery](https://github.com/lean-delivery/ansible-role-jenkins-slave) was used as reference.
 
 Available tags:
