@@ -2,6 +2,8 @@
 
 This directory contains role used for setting up jenkins agent.
 
+[Ansible role by lean-delivery](https://github.com/lean-delivery/ansible-role-jenkins-slave) was used as reference.
+
 Available tags:
 ```
 - setup
